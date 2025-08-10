@@ -1,0 +1,36 @@
+CREATE TABLE users (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  first_name VARCHAR(100),
+  last_name VARCHAR(100),
+  username VARCHAR(100) UNIQUE NOT NULL,
+  password VARCHAR(255),
+  role VARCHAR(50) DEFAULT 'user',
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+CREATE TABLE master_records (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  ww_bill_code VARCHAR(50),
+  received_date DATE,
+  invoice_no VARCHAR(100),
+  bill_detail TEXT,
+  head_of_account VARCHAR(100),
+  customer_name VARCHAR(100),
+  sanctioned_amount DECIMAL(12, 2),
+  cheque_number VARCHAR(100),
+  cheque_amount DECIMAL(12, 2),
+  cash_value DECIMAL(12, 2),
+  profit DECIMAL(12, 2),
+  total_expenses DECIMAL(12, 2),
+  income_tax_hardware DECIMAL(12, 2),
+  income_tax_service DECIMAL(12, 2),
+  sales_tax_gst_18 DECIMAL(12, 2),
+  sales_tax_sst_16 DECIMAL(12, 2),
+  one_fifth_gst DECIMAL(12, 2),
+  date_of_bill DATE,
+  date_of_printing DATE,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
