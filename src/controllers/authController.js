@@ -4,13 +4,14 @@ const User = require("../models/User");
 
 exports.signup = async (req, res) => {
   try {
-    const { username, password, role } = req.body;
+    const { username, password, role, stationId } = req.body;
     const hashedPassword = await bcrypt.hash(password, 10);
 
     const user = await User.create({
       username,
       password: hashedPassword,
       role,
+      stationId: role === "manager" ? stationId : null,
     });
     res.status(201).json({ message: "User created", user });
   } catch (error) {
@@ -30,7 +31,12 @@ exports.login = async (req, res) => {
       return res.status(401).json({ message: "Invalid password" });
 
     const token = jwt.sign(
-      { id: user.id, role: user.role },
+      {
+        id: user.id,
+        username: user.username,
+        role: user.role,
+        stationId: user.stationId, // null for admin/partner
+      },
       process.env.JWT_SECRET,
       { expiresIn: "1d" }
     );

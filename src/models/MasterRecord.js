@@ -1,5 +1,7 @@
+// models/MasterRecord.js
 const { DataTypes } = require("sequelize");
 const sequelize = require("../config/db");
+const Station = require("./Station");
 
 const MasterRecord = sequelize.define("MasterRecord", {
   date: {
@@ -72,6 +74,18 @@ const MasterRecord = sequelize.define("MasterRecord", {
     type: DataTypes.DATEONLY,
     allowNull: true,
   },
+  stationId: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    references: {
+      model: Station,
+      key: "id",
+    },
+    onDelete: "CASCADE",
+  },
 });
+
+MasterRecord.belongsTo(Station, { foreignKey: "stationId" });
+Station.hasMany(MasterRecord, { foreignKey: "stationId" });
 
 module.exports = MasterRecord;
