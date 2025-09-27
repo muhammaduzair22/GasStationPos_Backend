@@ -1,45 +1,90 @@
 const MasterRecord = require("../models/MasterRecord");
+const NozzleReading = require("../models/NozzleReading");
+const Expenditure = require("../models/Expenditure");
 
-// Create
+// --- Helper: Apply station restriction for manager ---
+function getStationWhere(user, baseWhere = {}) {
+  if (user.role === "manager") {
+    return { ...baseWhere, stationId: user.stationId };
+  }
+  return baseWhere; // admin, partner → unrestricted
+}
+
+// --- Create ---
 exports.createRecord = async (req, res) => {
   try {
+    // Enforce stationId for manager
     if (req.user.role === "manager") {
-      // Force stationId to manager's own station
       req.body.stationId = req.user.stationId;
     }
 
-    const record = await MasterRecord.create(req.body);
-    res.status(201).json(record);
+    const {
+      NozzleReadings = [],
+      Expenditures = [],
+      ...recordData
+    } = req.body || {};
+
+    // 1. Create master record
+    const record = await MasterRecord.create(recordData);
+
+    // 2. Nozzle readings
+    if (Array.isArray(NozzleReadings)) {
+      for (const nozzle of NozzleReadings) {
+        await NozzleReading.create({
+          nozzleNumber: nozzle.nozzleNumber,
+          opening: nozzle.opening,
+          closing: nozzle.closing,
+          masterRecordId: record.id,
+        });
+      }
+    }
+
+    // 3. Expenditures
+    if (Array.isArray(Expenditures)) {
+      for (const exp of Expenditures) {
+        await Expenditure.create({
+          description: exp.description,
+          category: exp.category,
+          amount: exp.amount,
+          masterRecordId: record.id,
+        });
+      }
+    }
+
+    const fullRecord = await MasterRecord.findByPk(record.id, {
+      include: [NozzleReading, Expenditure],
+    });
+
+    res.status(201).json(fullRecord);
   } catch (err) {
+    console.error("Error creating record:", err);
     res.status(500).json({ error: err.message });
   }
 };
 
-// Read All
+// --- Read All ---
 exports.getAllRecords = async (req, res) => {
   try {
-    let where = {};
-    if (req.user.role === "manager") {
-      where.stationId = req.user.stationId;
-    }
-
-    const records = await MasterRecord.findAll({ where });
+    const where = getStationWhere(req.user);
+    const records = await MasterRecord.findAll({
+      where,
+      include: [NozzleReading, Expenditure],
+    });
     res.json(records);
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
 };
 
-// Read One
+// --- Read One ---
 exports.getRecordById = async (req, res) => {
   try {
-    let where = { id: req.params.id };
+    const where = getStationWhere(req.user, { id: req.params.id });
+    const record = await MasterRecord.findOne({
+      where,
+      include: [NozzleReading, Expenditure],
+    });
 
-    if (req.user.role === "manager") {
-      where.stationId = req.user.stationId;
-    }
-
-    const record = await MasterRecord.findOne({ where });
     if (!record) return res.status(404).json({ error: "Record not found" });
     res.json(record);
   } catch (err) {
@@ -47,43 +92,65 @@ exports.getRecordById = async (req, res) => {
   }
 };
 
-// Update
+// --- Update ---
 exports.updateRecord = async (req, res) => {
   try {
-    let where = { id: req.params.id };
-
-    if (req.user.role === "manager") {
-      where.stationId = req.user.stationId;
-    }
-
+    const where = getStationWhere(req.user, { id: req.params.id });
     const record = await MasterRecord.findOne({ where });
     if (!record) return res.status(404).json({ error: "Record not found" });
 
     if (req.user.role === "manager") {
-      // Prevent changing stationId
-      delete req.body.stationId;
+      delete req.body.stationId; // prevent managers changing station
     }
 
-    await record.update(req.body);
-    res.json(record);
+    const { NozzleReadings = [], Expenditures = [], ...recordData } = req.body;
+
+    // 1. Update master record
+    await record.update(recordData);
+
+    // 2. Refresh nozzle readings
+    await NozzleReading.destroy({ where: { masterRecordId: record.id } });
+    for (const nozzle of NozzleReadings) {
+      await NozzleReading.create({
+        nozzleNumber: nozzle.nozzleNumber,
+        opening: nozzle.opening,
+        closing: nozzle.closing,
+        masterRecordId: record.id,
+      });
+    }
+
+    // 3. Refresh expenditures
+    await Expenditure.destroy({ where: { masterRecordId: record.id } });
+    for (const exp of Expenditures) {
+      await Expenditure.create({
+        description: exp.description,
+        category: exp.category,
+        amount: exp.amount,
+        masterRecordId: record.id,
+      });
+    }
+
+    const updatedRecord = await MasterRecord.findByPk(record.id, {
+      include: [NozzleReading, Expenditure],
+    });
+
+    res.json(updatedRecord);
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
 };
 
-// Delete
+// --- Delete ---
 exports.deleteRecord = async (req, res) => {
   try {
-    let where = { id: req.params.id };
-
-    if (req.user.role === "manager") {
-      where.stationId = req.user.stationId;
-    }
-
+    const where = getStationWhere(req.user, { id: req.params.id });
     const record = await MasterRecord.findOne({ where });
     if (!record) return res.status(404).json({ error: "Record not found" });
 
+    await NozzleReading.destroy({ where: { masterRecordId: record.id } });
+    await Expenditure.destroy({ where: { masterRecordId: record.id } });
     await record.destroy();
+
     res.json({ message: "Record deleted" });
   } catch (err) {
     res.status(500).json({ error: err.message });

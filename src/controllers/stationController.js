@@ -4,8 +4,8 @@ const Station = require("../models/Station");
 // Create a new station
 exports.createStation = async (req, res) => {
   try {
-    const { name, location } = req.body;
-    const station = await Station.create({ name, location });
+    const { name, location, gasRatePerKg } = req.body;
+    const station = await Station.create({ name, location, gasRatePerKg });
     res.status(201).json(station);
   } catch (err) {
     res
@@ -42,12 +42,13 @@ exports.getStationById = async (req, res) => {
 // Update station
 exports.updateStation = async (req, res) => {
   try {
-    const { name, location } = req.body;
+    const { name, location, gasRatePerKg } = req.body;
     const station = await Station.findByPk(req.params.id);
     if (!station) return res.status(404).json({ message: "Station not found" });
 
     station.name = name || station.name;
     station.location = location || station.location;
+    station.gasRatePerKg = gasRatePerKg || station.gasRatePerKg;
     await station.save();
 
     res.json(station);

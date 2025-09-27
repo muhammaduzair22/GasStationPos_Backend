@@ -6,54 +6,29 @@ const Station = require("./Station");
 const MasterRecord = sequelize.define("MasterRecord", {
   date: {
     type: DataTypes.DATEONLY,
-    allowNull: false,
+    allowNull: true,
   },
   totalSaleKgs: {
     type: DataTypes.FLOAT,
-    allowNull: false,
-  },
-  ratePerKg: {
-    type: DataTypes.FLOAT,
-    allowNull: false,
+    allowNull: true,
   },
   totalCngSale: {
     type: DataTypes.FLOAT,
-    allowNull: false,
+    allowNull: true,
   },
   otherRevenueLoanReturn: {
-    type: DataTypes.FLOAT,
-    defaultValue: 0,
-  },
-  expenditureDetail: {
-    type: DataTypes.TEXT,
-  },
-  kitchenExpensesAmount: {
-    type: DataTypes.FLOAT,
-    defaultValue: 0,
-  },
-  generalExpensesAmount: {
-    type: DataTypes.FLOAT,
-    defaultValue: 0,
-  },
-  generatorCompressorDieselLubeAmount: {
-    type: DataTypes.FLOAT,
-    defaultValue: 0,
-  },
-  salaryAdvanceNetPay: {
-    type: DataTypes.FLOAT,
-    defaultValue: 0,
-  },
-  loanRepaymentOtherPayments: {
     type: DataTypes.FLOAT,
     defaultValue: 0,
   },
   totalDailyExpenditure: {
     type: DataTypes.FLOAT,
     defaultValue: 0,
+    allowNull: true,
   },
   netSale: {
     type: DataTypes.FLOAT,
     defaultValue: 0,
+    allowNull: true,
   },
   remarks: {
     type: DataTypes.TEXT,
@@ -61,14 +36,17 @@ const MasterRecord = sequelize.define("MasterRecord", {
   depositable: {
     type: DataTypes.FLOAT,
     defaultValue: 0,
+    allowNull: true,
   },
   deposited: {
     type: DataTypes.FLOAT,
     defaultValue: 0,
+    allowNull: true,
   },
   withdrawal: {
     type: DataTypes.FLOAT,
     defaultValue: 0,
+    allowNull: true,
   },
   wdDepDate: {
     type: DataTypes.DATEONLY,
@@ -82,6 +60,16 @@ const MasterRecord = sequelize.define("MasterRecord", {
       key: "id",
     },
     onDelete: "CASCADE",
+  },
+  sngplMeterOpening: {
+    type: DataTypes.FLOAT,
+    defaultValue: 0,
+    allowNull: true,
+  },
+  sngplMeterClosing: {
+    type: DataTypes.FLOAT,
+    defaultValue: 0,
+    allowNull: true,
   },
 });
 

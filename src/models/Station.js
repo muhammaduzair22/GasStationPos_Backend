@@ -11,6 +11,11 @@ const Station = sequelize.define("Station", {
   location: {
     type: DataTypes.STRING,
   },
+  gasRatePerKg: {
+    type: DataTypes.FLOAT,
+    defaultValue: 0,
+    allowNull: true,
+  },
 });
 
 module.exports = Station;
