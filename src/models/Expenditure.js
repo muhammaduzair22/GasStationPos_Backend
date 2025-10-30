@@ -1,6 +1,5 @@
 const { DataTypes } = require("sequelize");
 const sequelize = require("../config/db");
-const MasterRecord = require("./MasterRecord");
 
 const Expenditure = sequelize.define("Expenditure", {
   description: {
@@ -31,8 +30,5 @@ const Expenditure = sequelize.define("Expenditure", {
     onDelete: "CASCADE",
   },
 });
-
-MasterRecord.hasMany(Expenditure, { foreignKey: "masterRecordId" });
-Expenditure.belongsTo(MasterRecord, { foreignKey: "masterRecordId" });
 
 module.exports = Expenditure;

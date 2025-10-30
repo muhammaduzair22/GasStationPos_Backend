@@ -1,6 +1,5 @@
-const User = require("../models/User");
-const Station = require("../models/Station");
 const bcrypt = require("bcrypt");
+const { User, Station } = require("../models");
 
 // Create new user (manager, admin, partner)
 exports.createUser = async (req, res) => {

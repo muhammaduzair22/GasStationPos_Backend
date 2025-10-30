@@ -1,6 +1,5 @@
 const { DataTypes } = require("sequelize");
 const sequelize = require("../config/db");
-const MasterRecord = require("./MasterRecord");
 
 const NozzleReading = sequelize.define("NozzleReading", {
   nozzleNumber: {
@@ -11,23 +10,26 @@ const NozzleReading = sequelize.define("NozzleReading", {
       max: 6, // only 1–6 allowed
     },
   },
-  opening: {
+  openingGirary: {
     type: DataTypes.FLOAT,
     allowNull: true,
-    defaultValue: 0,
+    defaultValue: null,
   },
-  closing: {
+  closingGirary: {
     type: DataTypes.FLOAT,
     allowNull: true,
-    defaultValue: 0,
+    defaultValue: null,
+  },
+  openingScreen: {
+    type: DataTypes.FLOAT,
+    allowNull: true,
+    defaultValue: null,
+  },
+  closingScreen: {
+    type: DataTypes.FLOAT,
+    allowNull: true,
+    defaultValue: null,
   },
 });
-
-// Relationships
-MasterRecord.hasMany(NozzleReading, {
-  foreignKey: "masterRecordId",
-  onDelete: "CASCADE",
-});
-NozzleReading.belongsTo(MasterRecord, { foreignKey: "masterRecordId" });
 
 module.exports = NozzleReading;

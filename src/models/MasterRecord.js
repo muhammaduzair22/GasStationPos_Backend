@@ -1,7 +1,6 @@
 // models/MasterRecord.js
 const { DataTypes } = require("sequelize");
 const sequelize = require("../config/db");
-const Station = require("./Station");
 
 const MasterRecord = sequelize.define("MasterRecord", {
   date: {
@@ -55,11 +54,6 @@ const MasterRecord = sequelize.define("MasterRecord", {
   stationId: {
     type: DataTypes.INTEGER,
     allowNull: false,
-    references: {
-      model: Station,
-      key: "id",
-    },
-    onDelete: "CASCADE",
   },
   sngplMeterOpening: {
     type: DataTypes.FLOAT,
@@ -72,8 +66,5 @@ const MasterRecord = sequelize.define("MasterRecord", {
     allowNull: true,
   },
 });
-
-MasterRecord.belongsTo(Station, { foreignKey: "stationId" });
-Station.hasMany(MasterRecord, { foreignKey: "stationId" });
 
 module.exports = MasterRecord;

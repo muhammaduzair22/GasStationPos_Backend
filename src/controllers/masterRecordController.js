@@ -1,6 +1,5 @@
-const MasterRecord = require("../models/MasterRecord");
 const NozzleReading = require("../models/NozzleReading");
-const Expenditure = require("../models/Expenditure");
+const { Expenditure, MasterRecord } = require("../models");
 
 // --- Helper: Apply station restriction for manager ---
 function getStationWhere(user, baseWhere = {}) {
@@ -31,9 +30,13 @@ exports.createRecord = async (req, res) => {
     if (Array.isArray(NozzleReadings)) {
       for (const nozzle of NozzleReadings) {
         await NozzleReading.create({
-          nozzleNumber: nozzle.nozzleNumber,
-          opening: nozzle.opening,
-          closing: nozzle.closing,
+          nozzleNumber: nozzle.nozzleNumber
+            ? Number(nozzle.nozzleNumber)
+            : null,
+          openingGirary: nozzle.openingGirary ?? null,
+          closingGirary: nozzle.closingGirary ?? null,
+          openingScreen: nozzle.openingScreen ?? null,
+          closingScreen: nozzle.closingScreen ?? null,
           masterRecordId: record.id,
         });
       }
@@ -113,8 +116,10 @@ exports.updateRecord = async (req, res) => {
     for (const nozzle of NozzleReadings) {
       await NozzleReading.create({
         nozzleNumber: nozzle.nozzleNumber,
-        opening: nozzle.opening,
-        closing: nozzle.closing,
+        openingGirary: nozzle.openingGirary,
+        closingGirary: nozzle.closingGirary,
+        openingScreen: nozzle.openingScreen,
+        closingScreen: nozzle.closingScreen,
         masterRecordId: record.id,
       });
     }
