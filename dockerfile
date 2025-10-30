@@ -23,4 +23,4 @@ ENV PORT=5000
 EXPOSE 5000
 
 # Start the server
-CMD ["node", "dist/app.js"]
+CMD ["node", "dist/server.js"]
