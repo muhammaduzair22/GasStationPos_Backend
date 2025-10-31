@@ -48,6 +48,7 @@ exports.createRecord = async (req, res) => {
         await Expenditure.create({
           description: exp.description,
           category: exp.category,
+          subcategory: exp.subcategory,
           amount: exp.amount,
           masterRecordId: record.id,
         });
@@ -130,6 +131,7 @@ exports.updateRecord = async (req, res) => {
       await Expenditure.create({
         description: exp.description,
         category: exp.category,
+        subcategory: exp.subcategory,
         amount: exp.amount,
         masterRecordId: record.id,
       });

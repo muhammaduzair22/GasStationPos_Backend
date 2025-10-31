@@ -14,11 +14,21 @@ const Expenditure = sequelize.define("Expenditure", {
     type: DataTypes.ENUM(
       "kitchen",
       "general",
-      "diesel",
+      "generatordieselelubecompressor",
       "salary",
-      "loan",
+      "premisesrent",
+      "pettycash",
+      "shahzebkhanallowence",
+      "kgandjaws",
+      "machineryrepair",
+      "loansgivenreturnedtostation",
+      "loansexpenditurebyakeknknk",
       "other"
     ),
+    allowNull: true,
+  },
+  subcategory: {
+    type: DataTypes.STRING,
     allowNull: true,
   },
   masterRecordId: {

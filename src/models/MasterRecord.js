@@ -11,6 +11,10 @@ const MasterRecord = sequelize.define("MasterRecord", {
     type: DataTypes.FLOAT,
     allowNull: true,
   },
+  gasRatePerKg: {
+    type: DataTypes.FLOAT,
+    allowNull: false,
+  },
   totalCngSale: {
     type: DataTypes.FLOAT,
     allowNull: true,
