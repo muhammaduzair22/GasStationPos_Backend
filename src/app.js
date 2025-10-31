@@ -21,6 +21,6 @@ app.use("/api/loan", loanRoutes);
 app.use("/api/employee", Employee);
 app.use("/api/categories", Category);
 
-sequelize.sync({ alter: true }).then(() => console.log("DB synced"));
+sequelize.sync().then(() => console.log("DB synced"));
 
 module.exports = app;
