@@ -7,6 +7,10 @@ const Employee = sequelize.define("Employee", {
     type: DataTypes.STRING,
     allowNull: false,
   },
+  designation: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
   contactNumber: {
     type: DataTypes.STRING,
     allowNull: true,
@@ -23,7 +27,7 @@ const Employee = sequelize.define("Employee", {
   },
 
   // Advance section
-  currentAdvanceAmount: {
+  monthlyallowance: {
     type: DataTypes.FLOAT,
     allowNull: false,
     defaultValue: 0, // amount currently taken as advance
@@ -39,15 +43,30 @@ const Employee = sequelize.define("Employee", {
     allowNull: false,
     defaultValue: 0, // total loan taken
   },
-  remainingLoanAmount: {
+  previousoutstanding: {
     type: DataTypes.FLOAT,
     allowNull: false,
     defaultValue: 0, // balance loan to be paid
   },
-  monthlyInstallmentAmount: {
+  newoutstanding: {
+    type: DataTypes.FLOAT,
+    allowNull: false,
+    defaultValue: 0, // balance loan to be paid
+  },
+  balancepayablesalary: {
     type: DataTypes.FLOAT,
     allowNull: false,
     defaultValue: 0, // amount to deduct each month from salary
+  },
+  salarypaid: {
+    type: DataTypes.FLOAT,
+    allowNull: false,
+    defaultValue: 0,
+  },
+  totalpaymentmade: {
+    type: DataTypes.FLOAT,
+    allowNull: false,
+    defaultValue: 0,
   },
   loanStartDate: {
     type: DataTypes.DATE,

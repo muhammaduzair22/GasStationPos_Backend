@@ -1,12 +1,5 @@
 module.exports = {
-  other: [
-    "Car Wash Electricity Bill",
-    "Car Wash Rent",
-    "GO Quarterly Rent",
-    "Tuckshop Electricity Bill",
-    "Tuckshop Rent",
-    "Miscellaneous",
-  ],
+  other: ["Other"],
 
   kitchen: [
     "Guests Dinner/Lunch",
@@ -15,15 +8,13 @@ module.exports = {
     "Staff Food Allowance-Weekly",
     "Gas Cylinder Refilling",
     "External Mechanics/Labour Food Expenses",
-    "Miscellaneous",
+    "Other",
   ],
 
   general: [
     "Bill-Internet",
     "Bill-Newspaper",
-    "Bill-PESCO",
     "Bill-PTCL/WiFi",
-    "Bill-SNGPL",
     "Fake Currency Note Adjustment",
     "Fuel/CNG Asstt. Manager",
     "Fuel/CNG Manager",
@@ -40,16 +31,16 @@ module.exports = {
     "Repair-Premises Structure & Fixtures",
     "Transport Intercity",
     "Transport Local",
-    "Miscellaneous",
+    "Other",
     "Discount Armed Forces",
-    "Package Cash Discount",
+    "Prize Scheme Cash/Item Expenditure",
   ],
 
   generatordieselelubecompressor: [
     "Diesel-Generator",
     "Lubricant-Compressor",
     "Lubricant-Generator",
-    "Miscellaneous",
+    "Other",
   ],
 
   salary: [
@@ -57,44 +48,43 @@ module.exports = {
     "Salary-Advance",
     "Salary-Monthly",
     "Shahzeb Khan-Allowance",
-    "Miscellaneous",
+    "Other",
   ],
 
   premisesrent: [
-    "Rent Premises-Bara Road LPG",
-    "Rent Premises-Farhan Shagai LPG",
     "Rent Premises-Janib Shah",
-    "Rent Premises-Mansehra LPG",
     "Rent Premises-Zareef",
-    "Miscellaneous",
+    "Rent Premises-Zareef",
+    "Other",
   ],
 
   pettycash: [],
 
-  shahzebkhanallowence: [],
-
   kgandjaws: [
-    "KG & JAWS Dastarkhwan-Dry Ration",
-    "KG & JAWS Dastarkhwan-Tandoor Roti",
-    "KG & JAWS-Langar Cook Salary",
-    "KG & JAWS-Vegetables",
-    "KG & JAWS Dastarkhwan-Loader Petrol/Lube",
-    "KG & JAWS Dastarkhwan-Loader Repair",
-    "Miscellaneous",
+    "Dry Ration",
+    "Tandoor Roti",
+    "Langar Cook Salary",
+    "Loader Petrol/Lube",
+    "Loader Repair",
+    "Vegetables",
+    "Other",
   ],
 
   loansgivenreturnedtostation: [
-    "Loan given by Dr. Nasir Khan for Bill etc",
-    "Loan given by Papoo Khan for Bill etc",
-    "Loan returned to Dr. Nasir Khan for Bill etc",
-    "Loan returned to Papoo Khan for Bill etc",
-    "Loan Given by A for Bill etc",
-    "Loan Returned to A for Bill etc",
-    "Personal Loan Taken by Dr. Nasir Khan",
-    "Personal Loan Taken by Ejaz Khan",
-    "Personal Loan Taken by Nadeem Khan",
-    "Personal Loan Taken by Papoo Khan",
-    "Miscellaneous",
+    "Loan Given by Papoo Khan",
+    "Loan Given by Ejaz Khan",
+    "Loan Given by Dr. Nasir Khan",
+    "Loan Given by Nadeem Khan",
+    "Loan Repaid to Papoo Khan",
+    "Loan Repaid to Dr. Nasir Khan",
+    "Loan Repaid to Ejaz Khan",
+    "Loan Repaid to Nadeem Khan ",
+    "Personal Loan Repaid by Papoo Khan",
+    "Personal Loan Repaid by Dr. Nasir Khan",
+    "Personal Loan Repaid by Ejaz Khan",
+    "Personal Loan Repaid by Nadeem Khan",
+    "Loan Returned by Employee",
+    "Other",
   ],
 
   machineryrepair: [
@@ -113,11 +103,11 @@ module.exports = {
     "Testing/Calibration of Dispenser Meter",
     "Testing/Calibration of Gas Meter",
     "Local Purchase Spare Parts-Morgan Compressor",
-    "Miscellaneous",
+    "Other",
   ],
 
   loansexpenditurebyakeknknk: [
-    "Joint Expenditure/Loan",
+    "Joint Expenditure 4Bro",
     "Monthly Disbursement-Dr. Nasir Khan",
     "Monthly Disbursement-Ejaz Khan",
     "Monthly Disbursement-Nadeem Khan",
@@ -128,6 +118,43 @@ module.exports = {
     "Waqar Khan Profit Share",
     "F.K-Profit/Loss Share on CNG/LPG (3%/5%)",
     "S.U-Profit/Loss Share on CNG/LPG (1.5%/2.5%)",
-    "Miscellaneous",
+    "Personal Loan-Papoo Khan",
+    "Personal Loan-Dr. Nasir Khan",
+    "Personal Loan-Ejaz Khan",
+    "Personal Loan-Nadeem Khan",
+    "Other",
   ],
+
+  loansexpendituredisbthrucheque: [
+    "Joint Expenditure 4Bro",
+    "Monthly Disbursement-Dr. Nasir Khan",
+    "Monthly Disbursement-Ejaz Khan",
+    "Monthly Disbursement-Nadeem Khan",
+    "Monthly Disbursement-Papoo Khan",
+    "Rent Premises-Bara Road LPG",
+    "Rent Premises-Farhan Shagai LPG",
+    "Rent Premises-Mansehra LPG",
+    "Waqar Khan Profit Share",
+    "F.K-Profit/Loss Share on CNG/LPG (3%/5%)",
+    "S.U-Profit/Loss Share on CNG/LPG (1.5%/2.5%)",
+    "Personal Loan-Papoo Khan",
+    "Personal Loan-Dr. Nasir Khan",
+    "Personal Loan-Ejaz Khan",
+    "Personal Loan-Nadeem Khan",
+    "Other",
+  ],
+
+  otherrevenue: [
+    "Rent Sakhi Car Wash",
+    "Electricity Bill Sakhi Car Wash",
+    "Rent Tuck Shop",
+    "Electricity Bill Tuck Shop",
+    "GO Monthly Rent",
+    "Loan Returned by Employee",
+    "Other",
+  ],
+
+  utilitybills: ["PESCO Bill", "SNGPL Bill", "Other"],
+
+  expenditurethrucheque: ["other"],
 };

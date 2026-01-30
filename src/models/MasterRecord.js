@@ -19,10 +19,6 @@ const MasterRecord = sequelize.define("MasterRecord", {
     type: DataTypes.FLOAT,
     allowNull: true,
   },
-  otherRevenueLoanReturn: {
-    type: DataTypes.FLOAT,
-    defaultValue: 0,
-  },
   totalDailyExpenditure: {
     type: DataTypes.FLOAT,
     defaultValue: 0,
@@ -46,12 +42,24 @@ const MasterRecord = sequelize.define("MasterRecord", {
     defaultValue: 0,
     allowNull: true,
   },
+  depdescription: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
   withdrawal: {
     type: DataTypes.FLOAT,
     defaultValue: 0,
     allowNull: true,
   },
+  wddescription: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
   wdDepDate: {
+    type: DataTypes.DATEONLY,
+    allowNull: true,
+  },
+  depDate: {
     type: DataTypes.DATEONLY,
     allowNull: true,
   },

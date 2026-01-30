@@ -7,14 +7,18 @@ exports.createEmployee = async (req, res) => {
   try {
     const {
       name,
+      designation,
       contactNumber,
       address,
       monthlySalary,
-      currentAdvanceAmount,
+      monthlyallowance,
       advanceDate,
       totalLoanAmount,
-      remainingLoanAmount,
-      monthlyInstallmentAmount,
+      previousoutstanding,
+      newoutstanding,
+      balancepayablesalary,
+      salarypaid,
+      totalpaymentmade,
       loanStartDate,
       loanEndDate,
       stationId,
@@ -22,14 +26,18 @@ exports.createEmployee = async (req, res) => {
 
     const employee = await Employee.create({
       name,
+      designation,
       contactNumber,
       address,
       monthlySalary,
-      currentAdvanceAmount: currentAdvanceAmount || 0,
+      monthlyallowance: monthlyallowance || 0,
       advanceDate: advanceDate || null,
       totalLoanAmount: totalLoanAmount || 0,
-      remainingLoanAmount: remainingLoanAmount || 0,
-      monthlyInstallmentAmount: monthlyInstallmentAmount || 0,
+      previousoutstanding: previousoutstanding || 0,
+      newoutstanding: newoutstanding || 0,
+      balancepayablesalary: balancepayablesalary || 0,
+      salarypaid: salarypaid || 0,
+      totalpaymentmade: totalpaymentmade || 0,
       loanStartDate: loanStartDate || null,
       loanEndDate: loanEndDate || null,
       stationId,
@@ -85,14 +93,18 @@ exports.updateEmployee = async (req, res) => {
   try {
     const {
       name,
+      designation,
       contactNumber,
       address,
       monthlySalary,
-      currentAdvanceAmount,
+      monthlyallowance,
       advanceDate,
       totalLoanAmount,
-      remainingLoanAmount,
-      monthlyInstallmentAmount,
+      previousoutstanding,
+      newoutstanding,
+      balancepayablesalary,
+      salarypaid,
+      totalpaymentmade,
       loanStartDate,
       loanEndDate,
       stationId,
@@ -103,29 +115,38 @@ exports.updateEmployee = async (req, res) => {
       return res.status(404).json({ message: "Employee not found" });
 
     employee.name = name || employee.name;
+    employee.designation = designation || employee.designation;
     employee.contactNumber = contactNumber || employee.contactNumber;
     employee.address = address || employee.address;
     employee.monthlySalary =
       monthlySalary !== undefined ? monthlySalary : employee.monthlySalary;
 
-    employee.currentAdvanceAmount =
-      currentAdvanceAmount !== undefined
-        ? currentAdvanceAmount
-        : employee.currentAdvanceAmount;
+    employee.monthlyallowance =
+      monthlyallowance !== undefined
+        ? monthlyallowance
+        : employee.monthlyallowance;
     employee.advanceDate = advanceDate || employee.advanceDate;
 
     employee.totalLoanAmount =
       totalLoanAmount !== undefined
         ? totalLoanAmount
         : employee.totalLoanAmount;
-    employee.remainingLoanAmount =
-      remainingLoanAmount !== undefined
-        ? remainingLoanAmount
-        : employee.remainingLoanAmount;
-    employee.monthlyInstallmentAmount =
-      monthlyInstallmentAmount !== undefined
-        ? monthlyInstallmentAmount
-        : employee.monthlyInstallmentAmount;
+    employee.previousoutstanding =
+      previousoutstanding !== undefined
+        ? previousoutstanding
+        : employee.previousoutstanding;
+    employee.newoutstanding =
+      newoutstanding !== undefined ? newoutstanding : employee.newoutstanding;
+    employee.balancepayablesalary =
+      balancepayablesalary !== undefined
+        ? balancepayablesalary
+        : employee.balancepayablesalary;
+    employee.salarypaid =
+      salarypaid !== undefined ? salarypaid : employee.salarypaid;
+    employee.totalpaymentmade =
+      totalpaymentmade !== undefined
+        ? totalpaymentmade
+        : employee.totalpaymentmade;
     employee.loanStartDate = loanStartDate || employee.loanStartDate;
     employee.loanEndDate = loanEndDate || employee.loanEndDate;
 
