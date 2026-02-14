@@ -44,7 +44,7 @@ const MasterRecord = sequelize.define("MasterRecord", {
   },
   depdescription: {
     type: DataTypes.STRING,
-    allowNull: false,
+    allowNull: true,
   },
   withdrawal: {
     type: DataTypes.FLOAT,
@@ -53,7 +53,7 @@ const MasterRecord = sequelize.define("MasterRecord", {
   },
   wddescription: {
     type: DataTypes.STRING,
-    allowNull: false,
+    allowNull: true,
   },
   wdDepDate: {
     type: DataTypes.DATEONLY,
